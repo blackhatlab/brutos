@@ -1,0 +1,61 @@
+import sys, os
+from optparse import OptionParser
+
+brutos_path = os.path.dirname(os.path.realpath(__file__))
+
+sys.path.insert (0, brutos_path + '/brutos_files/modules/')
+
+# BRUTOS MODULES #
+import brute_types, output
+# -------------- #
+
+TYPE_LIST_STR = ''
+LOGIN_LIST = None
+PASSWORD_LIST = None
+
+for i in brute_types.types: TYPE_LIST_STR += ('\n' + i)
+
+op = OptionParser ('--one-login <login> --llist <path to login-list file> -d <path to dictionary with passwords> --brute-type <brute-type>')
+op.add_option ('--one-login', dest='ologin', type='string', help='if you want to use one login and brute it, than set login at this flag')
+op.add_option ('--llist', dest='llist', type='string', help='if you want to use file with logins, than set path to file at this flag')
+op.add_option ('--brute-type', dest='btype', type='string', help='select one of avalible brute types: ' + TYPE_LIST_STR)
+op.add_option ('-d', '--dictionary', dest='di', type='string', help='set path to file with password at this flag')
+op.add_option ('--dd', dest='dd', action='store_true', default=False, help='use this flag if you want to use default password dictionary')
+(op, args) = op.parse_args ()
+
+def main ():
+    dedir = os.path.dirname(os.path.realpath(__file__)) + '/brutos_files/config/config.html'
+    brute_types.parse_xml_config (dedir)
+    
+    if op.dd:
+        fl = open (brutos_path + '/brutos_files/config/dict.lst')
+    else:
+        fl = open (op.di)
+    
+    if op.btype == 'smtp':
+        serv = raw_input('SMTP Server: ')
+        port = raw_input('Port: ')
+        
+        if op.ologin != None:
+            try:
+                brute_types.brute_smtp (op.ologin, fl, serv, port)
+            except KeyboardInterrupt:
+                print '\n' + output.INFO + 'Stoped'
+        else:
+            f = open (op.llist, 'r')
+            brute_types.brute_smtp (f.readlines(), fl, serv, port)
+            f.close ()
+    elif op.btype == 'ftp':
+        
+        serv = raw_input('FTP Server: ')
+        port = raw_input('Port: ')
+        
+        if op.ologin != None:
+            brute_types.brute_ftp (op.ologin, fl, serv, port)
+        else:
+            f = open (op.llist, 'r')
+            brute_types.brute_ftp (f.readlines(), fl, serv, port)
+            f.close ()
+            
+if __name__ == '__main__':
+    main ()
