@@ -1,5 +1,8 @@
+# coding: utf8
+
 import sys, os
 from optparse import OptionParser
+from colorama import Fore
 
 brutos_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -24,6 +27,21 @@ op.add_option ('--dd', dest='dd', action='store_true', default=False, help='use 
 (op, args) = op.parse_args ()
 
 def main ():
+    
+    banner = '''
+    ████───████──█─█──███──████──███
+    █──██──█──█──█─█───█───█──█──█
+    ████───████──█─█───█───█──█──███
+    █──██──█─█───█─█───█───█──█────█
+    ████───█─█───███───█───████──███
+    '''
+    info = '''
+    ''' + Fore.CYAN + '''[DEVELOPERS] ''' + Fore.WHITE + '''BLACK HAT LTD.
+    ''' + Fore.CYAN + '''[VERSION] ''' + Fore.WHITE + '''0.6
+    ''' + Fore.RESET
+    print Fore.RED + banner + Fore.RESET
+    print info
+    
     dedir = os.path.dirname(os.path.realpath(__file__)) + '/brutos_files/config/config.html'
     brute_types.parse_xml_config (dedir)
     
