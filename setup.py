@@ -9,6 +9,7 @@ print ' '*10 + 'Working Directory: ' + path + ' '*10
 print '='*70
 
 try:
+   os.system ('sudo pip install colorama && sudo pip install paramiko && sudo pip install mechanize')
    os.system ('sudo mv "' + script + '/brutos" /usr/bin')
    os.system ('sudo chmod +x /usr/bin/brutos')
    os.system ('sudo mv "' + script + '/brutos_files" /usr/bin')
