@@ -80,10 +80,10 @@ def main ():
         htype = raw_input ('Hash Type (md5/sha1/sha512/sha224/sha384/sha256): ')
         
         if op.ologin != None:
-            brute_types.brute_hash (op.ologin, fl)
+            brute_types.brute_hash (op.ologin, fl, htype)
         else:
             f = open (op.llist, 'r')
-            brute_types.brute_hash (f.readlines(), fl)
+            brute_types.brute_hash (f.readlines(), fl, htype)
             f.close ()
             
 if __name__ == '__main__':
