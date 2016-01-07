@@ -76,5 +76,15 @@ def main ():
             brute_types.brute_ftp (f.readlines(), fl, serv, port)
             f.close ()
             
+    elif op.btype == 'hash':
+        htype = raw_input ('Hash Type (md5/sha1/sha512/sha224/sha384/sha256): ')
+        
+        if op.ologin != None:
+            brute_types.brute_hash (op.ologin, fl)
+        else:
+            f = open (op.llist, 'r')
+            brute_types.brute_hash (f.readlines(), fl)
+            f.close ()
+            
 if __name__ == '__main__':
     main ()
