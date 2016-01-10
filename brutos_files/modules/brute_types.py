@@ -18,7 +18,7 @@ SHOW_GOODS = 1
 # ---------------- #
 
 types = [
-    'smtp', 'ftp'
+    'smtp', 'ftp', 'hash'
 ]
 
 def parse_xml_config (config_path):
@@ -111,12 +111,12 @@ def brute_ftp (login, pass_list, server, port):
         IS_ARRAY = False
     
     try:    
-        f = open (pass_list, 'r')
+        f = pass_list
     except:
         print output.ERR + 'Can\'t open file with passwords!'
         exit ()
         
-    for i in f.readlines ():
+    for i in f:
         pwd_full = i.strip ('\n')
         if IS_ARRAY:
             for j in login:
@@ -158,12 +158,12 @@ def brute_hash (hash, unhash_list, hash_type):
         IS_ARRAY = False
     
     try:    
-        f = open (pass_list, 'r')
+        f = unhash_list
     except:
         print output.ERR + 'Can\'t open file with passwords!'
         exit ()
         
-    for i in f.readlines ():
+    for i in f:
         pwd_full = i.strip ('\n')
         if IS_ARRAY:
             for j in login:
@@ -213,41 +213,41 @@ def brute_hash (hash, unhash_list, hash_type):
                     if SHOW_GOODS == 1: show_goods(GOOD)
         else:
                     if hash_type == 'md5':
-                        if lg_full == hashlib.md5(pwd_full).hexdigest ():
-                            print 'Hash: ' + lg_full + ' Unhash: ' + pwd_full
+                        if hash == hashlib.md5(pwd_full).hexdigest ():
+                            print output.YES + 'Hash: ' + hash + ' Unhash: ' + pwd_full
                             break
                         else:
-                            print output.NO + 'Unhash ' + pwd_full + ' is not for hash ' + lg_full
+                            print output.NO + 'Unhash ' + pwd_full + ' is not for hash ' + hash
                     elif hash_type == 'sha1':
-                        if lg_full == hashlib.sha1(pwd_full).hexdigest ():
-                            print 'Hash: ' + lg_full + ' Unhash: ' + pwd_full
+                        if hash == hashlib.sha1(pwd_full).hexdigest ():
+                            print output.YES + 'Hash: ' + hash + ' Unhash: ' + pwd_full
                             break
                         else:
-                            print output.NO + 'Unhash ' + pwd_full + ' is not for hash ' + lg_full
+                            print output.NO + 'Unhash ' + pwd_full + ' is not for hash ' + hash
                     elif hash_type == 'sha224':
-                        if lg_full == hashlib.sha224(pwd_full).hexdigest ():
-                            print 'Hash: ' + lg_full + ' Unhash: ' + pwd_full
+                        if hash == hashlib.sha224(pwd_full).hexdigest ():
+                            print output.YES + 'Hash: ' + hash + ' Unhash: ' + pwd_full
                             break
                         else:
-                            print output.NO + 'Unhash ' + pwd_full + ' is not for hash ' + lg_full
+                            print output.NO + 'Unhash ' + pwd_full + ' is not for hash ' + hash
                     elif hash_type == 'sha256':
-                        if lg_full == hashlib.sha256(pwd_full).hexdigest ():
-                            print 'Hash: ' + lg_full + ' Unhash: ' + pwd_full
+                        if hash == hashlib.sha256(pwd_full).hexdigest ():
+                            print output.YES + 'Hash: ' + hash + ' Unhash: ' + pwd_full
                             break
                         else:
-                            print output.NO + 'Unhash ' + pwd_full + ' is not for hash ' + lg_full
+                            print output.NO + 'Unhash ' + pwd_full + ' is not for hash ' + hash
                     elif hash_type == 'sha384':
-                        if lg_full == hashlib.sha384(pwd_full).hexdigest ():
-                            print 'Hash: ' + lg_full + ' Unhash: ' + pwd_full
+                        if hash == hashlib.sha384(pwd_full).hexdigest ():
+                            print output.YES + 'Hash: ' + hash + ' Unhash: ' + pwd_full
                             break
                         else:
-                            print output.NO + 'Unhash ' + pwd_full + ' is not for hash ' + lg_full
+                            print output.NO + 'Unhash ' + pwd_full + ' is not for hash ' + hash
                     elif hash_type == 'sha512':
-                        if lg_full == hashlib.sha512(pwd_full).hexdigest ():
-                            print 'Hash: ' + lg_full + ' Unhash: ' + pwd_full
+                        if hash == hashlib.sha512(pwd_full).hexdigest ():
+                            print output.YES + 'Hash: ' + hash + ' Unhash: ' + pwd_full
                             break
                         else:
-                            print output.NO + 'Unhash ' + pwd_full + ' is not for hash ' + lg_full
+                            print output.NO + 'Unhash ' + pwd_full + ' is not for hash ' + hash
     if SHOW_GOODS == 1: show_goods(GOOD)
 
 def show_goods (goods):
