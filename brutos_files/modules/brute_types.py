@@ -4,7 +4,7 @@ import smtplib, ftplib, telnetlib, hashlib
 from sys import path
 import os, time
 from colorama import Fore
-from bs4 import BeautifulSoup
+import json
 
 path.insert (0, os.path.dirname(os.path.realpath(__file__)) + '/brutos_files/modules/')
 
@@ -21,22 +21,22 @@ types = [
     'smtp', 'ftp', 'hash'
 ]
 
-def parse_xml_config (config_path):
+def parse_json_config (config_path):
     
     global TIME_SLEEP, SHOW_GOODS
     
-    ML_CODE = ''
+    JSON_CODE = ''
     
     try:
         for i in open (config_path, 'r').readlines ():
-            ML_CODE += i
+            JSON_CODE += i
     except IOError:
         print output.ERR + 'Can\'t open config-file!'
     
-    bs_parser = BeautifulSoup (ML_CODE, 'lxml')
+    parser = json.loads (JSON_CODE)
     
-    TIME_SLEEP = int (bs_parser.find ('div', class_='timeSleep').text)
-    SHOW_GOODS = int (bs_parser.find ('div', class_='showGoods').text)
+    TIME_SLEEP = parser ['timeSleep']
+    SHOW_GOODS = parser ['showGoods']
 
 def brute_smtp (login, pass_list, server, port):
     
