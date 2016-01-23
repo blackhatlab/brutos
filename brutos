@@ -11,9 +11,6 @@ brutos_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert (0, brutos_path + '/brutos_files/modules/')
 
 
-
-print brutos_path + '/brutos_files/modules/'
-
 # BRUTOS MODULES #
 import brute_types, output
 # -------------- #
