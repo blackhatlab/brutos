@@ -10,6 +10,10 @@ brutos_path = os.path.dirname(os.path.realpath(__file__))
 
 sys.path.insert (0, brutos_path + '/brutos_files/modules/')
 
+
+
+print brutos_path + '/brutos_files/modules/'
+
 # BRUTOS MODULES #
 import brute_types, output
 # -------------- #
@@ -44,8 +48,8 @@ def main ():
     print Fore.RED + banner + Fore.RESET
     print info
     
-    dedir = os.path.dirname(os.path.realpath(__file__)) + '/brutos_files/config/config.html'
-    brute_types.parse_xml_config (dedir)
+    dedir = os.path.dirname(os.path.realpath(__file__)) + '/brutos_files/config/config.json'
+    brute_types.parse_json_config (dedir)
     
     if op.dd:
         fl = open (brutos_path + '/brutos_files/config/dict.lst')
