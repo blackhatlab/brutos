@@ -1,0 +1,8 @@
+#!/bin/bash
+
+pip install colorama
+pip install paramiko
+
+sudo mv ./brutos /usr/bin
+
+exit
